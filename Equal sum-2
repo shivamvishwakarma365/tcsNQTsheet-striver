@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    string equilibrium(int *arr, int n) {
+        string s="NO";
+        int sum=0;
+        int i=0;
+        for(i=0;i<n;i++){
+            sum+=arr[i];
+        }
+        int leftsum=0;
+        for(i=0;i<n;i++){
+            sum-=arr[i];
+            if(sum==leftsum){
+                s="YES";
+                break;
+            }
+            leftsum+=arr[i];
+        }
+        return s;
+    }
+};
