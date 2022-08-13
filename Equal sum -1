@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    string equilibrium(int *arr, int n) {
+        string s="NO";
+        for(int i=0;i<n;i++){
+            int leftsum=0;
+            int rightsum=0;
+            for(int j=0;j<i;j++){
+                leftsum+=arr[j];
+            }
+            for(int k=i+1;k<n;k++){
+                rightsum+=arr[k];
+            }
+            if(leftsum==rightsum){
+                s="YES";
+            }
+        }
+        return s;
+    }
