@@ -1,0 +1,26 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main(){
+   vector<int>arr={1,3,8,2,9,7,6,5};
+   int n=arr.size();
+   int mi=arr[0];
+   int ma=arr[0];
+   for(int i=0;i<n;i++){
+       mi=min(mi,arr[i]);
+       ma=max(ma,arr[i]);
+   }
+   cout<<mi<<" "<<ma<<endl;
+   int seconds=2147483647;
+   int secondl=-1;
+   for(int i=0;i<n;i++){
+       if(arr[i]<ma){
+           secondl=max(secondl,arr[i]);
+       }
+       if(arr[i]>mi){
+           seconds=min(seconds,arr[i]);
+       }
+   }
+   cout<<secondl<<" "<<seconds;
+   
+    }
