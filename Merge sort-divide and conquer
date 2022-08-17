@@ -1,0 +1,99 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+void merge(vector<int>&arr,int s,int e){
+    int mid=(s+e)/2;
+    int length1=mid-s+1;
+    int length2=e-mid;
+    //dynamic array
+    int *first=new int[length1];
+    int *second=new int[length2];
+    int mainarrayindex=s;
+    //copying the values
+    for(int i=0;i<length1;i++){
+        first[i]=arr[mainarrayindex++];
+    }
+    mainarrayindex=mid+1;
+    //copying the values
+    for(int i=0;i<length2;i++){
+        second[i]=arr[mainarrayindex++];
+    }
+    //merge two sorted arrays
+    int index1=0;
+    int index2=0;
+    mainarrayindex=s;
+    
+    while(index1<length1 && index2<length2){
+        if(first[index1]<second[index2]){
+            arr[mainarrayindex++]=first[index1++];
+            
+        }else{
+            arr[mainarrayindex++]=second[index2++];
+        }
+    }
+    while(index1 < length1) {
+        arr[mainarrayindex++] = first[index1++];
+    }
+
+    while(index2 < length2 ) {
+        arr[mainarrayindex] = second[index2++];
+    }
+    
+}
+void mergesort(vector<int>&arr,int s,int e){
+    if(s>=e){
+        return;
+    }
+    int mid=(s+e)/2;
+    //to sort the left part
+    mergesort(arr,s,mid);
+    //to sort the right part
+    mergesort(arr,mid+1,e);
+    //to merge
+    merge(arr,s,e);
+}
+
+
+
+
+
+int main(){
+    vector<int>arr;
+    arr={38,27,43,3,9,82,10};
+    int n=arr.size();
+    mergesort(arr,0,n-1);
+    for(int i:arr){
+        cout<<i<<" ";
+    }
+    return 0;
+}
+
+//Time Complexity: O(n log(n)), 
+Sorting arrays on different machines. 
+Merge Sort is a recursive algorithm and time complexity can be expressed as following recurrence relation. 
+//Space Complexity :
+
+• In merge sort all elements are copied into an auxiliary array 
+• so N auxiliary space is required for merge sort.
+ 
+
+Algorithmic Paradigm: Divide and Conquer
+
+Is Merge sort In Place?
+ No in a typical implementation
+
+Is Merge sort Stable: 
+Yes, merge sort is stable. 
+//
+Applications of Merge Sort: 
+Merge Sort is useful for sorting linked lists in O(nLogn) time. In the case of linked lists, the case is different mainly due to the difference in memory allocation of arrays and linked lists. Unlike arrays, linked list nodes may not be adjacent in memory. Unlike an array, in the linked list, we can insert items in the middle in O(1) extra space and O(1) time. Therefore, the merge operation of merge sort can be implemented without extra space for linked lists.
+In arrays, we can do random access as elements are contiguous in memory. Let us say we have an integer (4-byte) array A and let the address of A[0] be x then to access A[i], we can directly access the memory at (x + i*4). Unlike arrays, we can not do random access in the linked list. Quick Sort requires a lot of this kind of access. In a linked list to access i’th index, we have to travel each and every node from the head to i’th node as we don’t have a contiguous block of memory. Therefore, the overhead increases for quicksort. Merge sort accesses data sequentially and the need of random access is low.
+Inversion Count Problem
+Used in External Sorting
+
+
+//
+Drawbacks of Merge Sort:
+Slower comparative to the other sort algorithms for smaller tasks.
+The merge sort algorithm requires an additional memory space of 0(n) for the temporary array.
+It goes through the whole process even if the array is sorted.
